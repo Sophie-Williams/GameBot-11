@@ -226,6 +226,76 @@ def buy_food(food):
             left_click()
             buy_food(food)
 
+
+def get_seat_one():
+    box = (x_pad + 26, y_pad + 61, x_pad + 26 + 61, y_pad + 61 + 15)
+    image = ImageOps.grayscale(ImageGrab.grab(box))
+    arr = array(image.getcolors())
+    arr = arr.sum()
+    print(arr)
+    image.save(os.getcwd() + '\\seat_one__' + str(int(time.time())) + '.png', 'PNG')
+    return arr
+
+
+def get_seat_two():
+    box = (x_pad + 127, y_pad + 61, x_pad + 127 + 61, y_pad + 61 + 15)
+    image = ImageOps.grayscale(ImageGrab.grab(box))
+    arr = array(image.getcolors())
+    arr = arr.sum()
+    print(arr)
+    image.save(os.getcwd() + '\\seat_two__' + str(int(time.time())) + '.png', 'PNG')
+    return arr
+
+
+def get_seat_three():
+    box = (x_pad + 228, y_pad + 61, x_pad + 228 + 61, y_pad + 61 + 15)
+    image = ImageOps.grayscale(ImageGrab.grab(box))
+    arr = array(image.getcolors())
+    arr = arr.sum()
+    print(arr)
+    image.save(os.getcwd() + '\\seat_three__' + str(int(time.time())) + '.png', 'PNG')
+    return arr
+
+
+def get_seat_four():
+    box = (x_pad + 329, y_pad + 61, x_pad + 329 + 61, y_pad + 61 + 15)
+    image = ImageOps.grayscale(ImageGrab.grab(box))
+    arr = array(image.getcolors())
+    arr = arr.sum()
+    print(arr)
+    image.save(os.getcwd() + '\\seat_four__' + str(int(time.time())) + '.png', 'PNG')
+    return arr
+
+
+def get_seat_five():
+    box = (x_pad + 430, y_pad + 61, x_pad + 430 + 61, y_pad + 61 + 15)
+    image = ImageOps.grayscale(ImageGrab.grab(box))
+    arr = array(image.getcolors())
+    arr = arr.sum()
+    print(arr)
+    image.save(os.getcwd() + '\\seat_five__' + str(int(time.time())) + '.png', 'PNG')
+    return arr
+
+
+def get_seat_six():
+    box = (x_pad + 531, y_pad + 61, x_pad + 531 + 61, y_pad + 61 + 15)
+    image = ImageOps.grayscale(ImageGrab.grab(box))
+    arr = array(image.getcolors())
+    arr = arr.sum()
+    print(arr)
+    image.save(os.getcwd() + '\\seat_six__' + str(int(time.time())) + '.png', 'PNG')
+    return arr
+
+
+def get_all_seat():
+    get_seat_one()
+    get_seat_two()
+    get_seat_three()
+    get_seat_four()
+    get_seat_five()
+    get_seat_six()
+
+
 sizeOfFood = {'shrimp': 5,
               'rice': 10,
               'nori': 10,
