@@ -296,6 +296,12 @@ def get_all_seat():
     get_seat_six()
 
 
+# Dictionary by sushi color
+seat_sushi = {3050: 'caliroll',
+              2577: 'onigiri',
+              2584: 'gunkan'}
+
+# Dictionary start size of food              
 sizeOfFood = {'shrimp': 5,
               'rice': 10,
               'nori': 10,
@@ -311,6 +317,94 @@ def check_food():
                 print('%s is low' % i)
                 buy_food(i)
 
+
+def check_bubbles():
+    check_food()
+    s1 = get_seat_one()
+    if s1 != NoBubble.seat_one:
+        if seat_sushi.__contains__(s1):
+            print('table 1 is occupied and needs %s' % seat_sushi[s1])
+
+            make_sushi(seat_sushi[s1])
+        else:
+            print('sushi not found!\n sushiType = %i' % s1)
+
+    else:
+        print
+        'Table 1 unoccupied'
+
+    clear_tables()
+    check_food()
+    s2 = get_seat_two()
+    if s2 != NoBubble.seat_two:
+        if seat_sushi.__contains__(s2):
+            print('table 2 is occupied and needs %s' % seat_sushi[s2])
+
+            make_sushi(seat_sushi[s2])
+        else:
+            print('sushi not found!\n sushiType = %i' % s2)
+    else:
+        print('Table 2 unoccupied')
+
+    check_food()
+    s3 = get_seat_three()
+    if s3 != NoBubble.seat_three:
+        if seat_sushi.__contains__(s3):
+            print('table 3 is occupied and needs %s' % seat_sushi[s3])
+            make_sushi(seat_sushi[s3])
+        else:
+            print('sushi not found!\n sushiType = %i' % s3)
+    else:
+        print('Table 3 unoccupied')
+
+    check_food()
+    s4 = get_seat_four()
+    if s4 != NoBubble.seat_four:
+        if seat_sushi.__contains__(s4):
+            print('table 4 is occupied and needs %s' % seat_sushi[s4])
+            make_sushi(seat_sushi[s4])
+        else:
+            print('sushi not found!\n sushiType = %i' % s4)
+    else:
+        print('Table 4 unoccupied')
+
+    clear_tables()
+    check_food()
+    s5 = get_seat_five()
+    if s5 != NoBubble.seat_five:
+        if seat_sushi.__contains__(s5):
+            print('table 5 is occupied and needs %s' % seat_sushi[s5])
+
+            make_sushi(seat_sushi[s5])
+        else:
+            print('sushi not found!\n sushiType = %i' % s5)
+
+    else:
+        print('Table 5 unoccupied')
+
+    check_food()
+    s6 = get_seat_six()
+    if s6 != NoBubble.seat_six:
+        if seat_sushi.__contains__(s6):
+            print('table 1 is occupied and needs %s' % seat_sushi[s6])
+
+            make_sushi(seat_sushi[s6])
+        else:
+            print('sushi not found!\n sushiType = %i' % s6)
+
+    else:
+        print('Table 6 unoccupied')
+
+    clear_tables()
+
+
+class NoBubble:
+    seat_one = 6495
+    seat_two = 5893
+    seat_three = 11131
+    seat_four = 10520
+    seat_five = 6867
+    seat_six = 8040
 
 class Cord:
     food_shrimp = (35, 334)
