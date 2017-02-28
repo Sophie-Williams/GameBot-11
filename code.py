@@ -95,6 +95,9 @@ def clear_tables():
 
 def make_sushi(food):
     if food == 'caliroll':
+        sizeOfFood['rice'] -= 1
+        sizeOfFood['nori'] -= 1
+        sizeOfFood['fishegg'] -= 1
         mouse_pos(Cord.food_rise)
         left_click()
         time.sleep(.05)
@@ -109,6 +112,8 @@ def make_sushi(food):
         time.sleep(1.5)
 
     elif food == 'onigiri':
+        sizeOfFood['rice'] -= 2
+        sizeOfFood['nori'] -= 1
         mouse_pos(Cord.food_rise)
         left_click()
         time.sleep(.05)
@@ -122,6 +127,9 @@ def make_sushi(food):
         left_click()
         time.sleep(1.5)
     elif food == 'gunkan':
+        sizeOfFood['rice'] -= 1
+        sizeOfFood['nori'] -= 1
+        sizeOfFood['fishegg'] -= 2
         mouse_pos(Cord.food_rise)
         left_click()
         time.sleep(.05)
@@ -154,6 +162,8 @@ def buy_food(food):
             time.sleep(.1)
             left_click()
             mouse_pos(Cord.deliver_normal)
+            sizeOfFood['rice'] += 10
+            print(" %d rice is available" % sizeOfFood['rice'])
             time.sleep(.1)
             left_click()
             time.sleep(2.5)
@@ -178,6 +188,8 @@ def buy_food(food):
             time.sleep(.1)
             left_click()
             mouse_pos(Cord.deliver_normal)
+            sizeOfFood['nori'] += 10
+            print(" %d nori is available" % sizeOfFood['nori'])
             time.sleep(.1)
             left_click()
             time.sleep(2.5)
@@ -202,6 +214,8 @@ def buy_food(food):
             time.sleep(.1)
             left_click()
             mouse_pos(Cord.deliver_normal)
+            sizeOfFood['fishegg'] += 10
+            print(" %d fishegg is available" % sizeOfFood['fishegg'])
             time.sleep(.1)
             left_click()
             time.sleep(2.5)
@@ -218,6 +232,15 @@ sizeOfFood = {'shrimp': 5,
               'fishegg': 10,
               'salmon': 5,
               'unagi': 5}
+
+
+def check_food():
+    for i, j in sizeOfFood.items():
+        if i == 'nori' or i == 'rice' or i == 'fishegg':
+            if j <= 4:
+                print('%s is low' % i)
+                buy_food(i)
+
 
 class Cord:
     food_shrimp = (35, 334)
@@ -247,16 +270,12 @@ class Cord:
 
 
 def main():
-    rgb = screen_grab()
-    print(rgb.getpixel(Cord.buy_nori))
-    print(rgb.getpixel(Cord.buy_rice))
-    print(rgb.getpixel(Cord.buy_fish_egg))
-    print(rgb.getpixel(Cord.buy_salmon))
-    print(rgb.getpixel(Cord.buy_shrimp))
-    print(rgb.getpixel(Cord.buy_unagi))
+    start_game()
+    while 1:
 
-    #input_food = input() #TODO: loop while
-    #make_sushi(input_food)
+        input_food = input()
+        make_sushi(input_food)
+        check_food()
 
 
 
