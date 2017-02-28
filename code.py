@@ -212,6 +212,13 @@ def buy_food(food):
             left_click()
             buy_food(food)
 
+sizeOfFood = {'shrimp': 5,
+              'rice': 10,
+              'nori': 10,
+              'fishegg': 10,
+              'salmon': 5,
+              'unagi': 5}
+
 class Cord:
     food_shrimp = (35, 334)
     food_rise = (92, 334)
@@ -241,14 +248,12 @@ class Cord:
 
 def main():
     rgb = screen_grab()
-    #start_game()
-
-    print rgb.getpixel(Cord.buy_nori)
-    print rgb.getpixel(Cord.buy_fish_egg)
-    print rgb.getpixel(Cord.buy_salmon)
-    print rgb.getpixel(Cord.buy_shrimp)
-    print rgb.getpixel(Cord.buy_unagi)
-    print rgb.getpixel(Cord.buy_rice)
+    print(rgb.getpixel(Cord.buy_nori))
+    print(rgb.getpixel(Cord.buy_rice))
+    print(rgb.getpixel(Cord.buy_fish_egg))
+    print(rgb.getpixel(Cord.buy_salmon))
+    print(rgb.getpixel(Cord.buy_shrimp))
+    print(rgb.getpixel(Cord.buy_unagi))
 
     #input_food = input() #TODO: loop while
     #make_sushi(input_food)
