@@ -17,10 +17,12 @@ def screen_grab():
     box = (x_pad + 1, y_pad + 1, x_pad + 660, y_pad + 500)
     # Full SnapShot of your screen. (x,y,x,y) First pair (x,y.. top left of the box,
     # Second pair (..,x,y) bottom right.
-    im = ImageGrab.grab(box)
+    image = ImageGrab.grab(box)
+
     # Time module works (First argument save the file and second is the file format).
     # os.getcwd() current directory the code.
-    im.save(os.getcwd() + '\\full_snap__' + str(int(time.time())) + '.png', 'PNG')
+    #im.save(os.getcwd() + '\\full_snap__' + str(int(time.time())) + '.png', 'PNG')
+    return image
 
 
 def left_click():
@@ -137,6 +139,79 @@ def make_sushi(food):
         time.sleep(1.5)
 
 
+def buy_food(food):
+    if food == 'rice':
+        mouse_pos(Cord.phone)
+        time.sleep(.1)
+        left_click()
+        mouse_pos(Cord.menu_rice)
+        time.sleep(.05)
+        left_click()
+        rgb = screen_grab()
+        if rgb.getpixel(Cord.buy_rice) != (109, 123, 127):
+            print("rice is available")
+            mouse_pos(Cord.buy_rice)
+            time.sleep(.1)
+            left_click()
+            mouse_pos(Cord.deliver_normal)
+            time.sleep(.1)
+            left_click()
+            time.sleep(2.5)
+        else:
+            print("rice is not available")
+            mouse_pos(Cord.menu_exit)
+            time.sleep(.1)
+            left_click()
+            buy_food(food)
+
+    if food == 'nori':
+        mouse_pos(Cord.phone)
+        time.sleep(.1)
+        left_click()
+        mouse_pos(Cord.menu_toppings)
+        time.sleep(.05)
+        left_click()
+        rgb = screen_grab()
+        if rgb.getpixel(Cord.buy_nori) != (53, 53, 39):
+            print("nori is available")
+            mouse_pos(Cord.buy_nori)
+            time.sleep(.1)
+            left_click()
+            mouse_pos(Cord.deliver_normal)
+            time.sleep(.1)
+            left_click()
+            time.sleep(2.5)
+        else:
+            print("nori is not available")
+            mouse_pos(Cord.menu_exit)
+            time.sleep(.1)
+            left_click()
+            buy_food(food)
+
+    if food == 'fishegg':
+        mouse_pos(Cord.phone)
+        time.sleep(.1)
+        left_click()
+        mouse_pos(Cord.menu_toppings)
+        time.sleep(.05)
+        left_click()
+        rgb = screen_grab()
+        if rgb.getpixel(Cord.buy_fish_egg) != (127, 61, 0):
+            print("fish egg is available")
+            mouse_pos(Cord.buy_fish_egg)
+            time.sleep(.1)
+            left_click()
+            mouse_pos(Cord.deliver_normal)
+            time.sleep(.1)
+            left_click()
+            time.sleep(2.5)
+        else:
+            print("fish egg is not available")
+            mouse_pos(Cord.menu_exit)
+            time.sleep(.1)
+            left_click()
+            buy_food(food)
+
 class Cord:
     food_shrimp = (35, 334)
     food_rise = (92, 334)
@@ -165,10 +240,18 @@ class Cord:
 
 
 def main():
-    screen_grab()
-    start_game()
-    input_food = input() #TODO: loop while
-    make_sushi(input_food)
+    rgb = screen_grab()
+    #start_game()
+
+    print rgb.getpixel(Cord.buy_nori)
+    print rgb.getpixel(Cord.buy_fish_egg)
+    print rgb.getpixel(Cord.buy_salmon)
+    print rgb.getpixel(Cord.buy_shrimp)
+    print rgb.getpixel(Cord.buy_unagi)
+    print rgb.getpixel(Cord.buy_rice)
+
+    #input_food = input() #TODO: loop while
+    #make_sushi(input_food)
 
 
 
