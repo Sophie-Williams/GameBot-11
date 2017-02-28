@@ -24,7 +24,15 @@ def screen_grab():
     #im.save(os.getcwd() + '\\full_snap__' + str(int(time.time())) + '.png', 'PNG')
     return image
 
+def grab():
+    box = (x_pad + 1, y_pad + 1, x_pad + 660, y_pad + 500)
+    im = ImageOps.grayscale(ImageGrab.grab(box))
+    arr = array(im.getcolors())
+    arr = arr.sum()
+    print(arr)
+    return arr
 
+    
 def left_click():
     win32api.mouse_event(win32con.MOUSEEVENTF_LEFTDOWN, 0, 0)
     time.sleep(.1)
@@ -435,12 +443,8 @@ class Cord:
 
 def main():
     start_game()
-    while 1:
-
-        input_food = input()
-        make_sushi(input_food)
-        check_food()
-
+    while True:
+        check_bubbles()
 
 
 if __name__ == '__main__':
