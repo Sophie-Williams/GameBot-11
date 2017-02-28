@@ -1,0 +1,1 @@
+.pyw and .py different. .pyw run without start console.
