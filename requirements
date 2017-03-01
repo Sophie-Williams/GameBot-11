@@ -1,0 +1,10 @@
+libraries:
+  The Python Imaging Library: pip install pillow
+  Numpy: pip install numpy
+  PyWin: pip install pypiwin32
+  
+  
+  
+  
+  
+  
