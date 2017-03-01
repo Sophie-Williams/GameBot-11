@@ -5,25 +5,27 @@ import win32api, win32con
 import sys
 import csv
 from PIL import ImageOps
+from builtins import print
 from numpy import *
 
 #----Global Variables
 x_pad = 464
 y_pad = 242
 
-
+# ScreenShot function
 def screen_grab():
     # Coordinates (x,y,x,y).
     box = (x_pad + 1, y_pad + 1, x_pad + 660, y_pad + 500)
     # Full SnapShot of your screen. (x,y,x,y) First pair (x,y.. top left of the box,
     # Second pair (..,x,y) bottom right.
-    image = ImageGrab.grab(box)
-
+    im = ImageGrab.grab(box)
     # Time module works (First argument save the file and second is the file format).
     # os.getcwd() current directory the code.
     #im.save(os.getcwd() + '\\full_snap__' + str(int(time.time())) + '.png', 'PNG')
-    return image
+    return im
 
+
+# RGB value test function
 def grab():
     box = (x_pad + 1, y_pad + 1, x_pad + 660, y_pad + 500)
     im = ImageOps.grayscale(ImageGrab.grab(box))
@@ -32,27 +34,18 @@ def grab():
     print(arr)
     return arr
 
-    
+
 def left_click():
     win32api.mouse_event(win32con.MOUSEEVENTF_LEFTDOWN, 0, 0)
     time.sleep(.1)
     win32api.mouse_event(win32con.MOUSEEVENTF_LEFTUP, 0, 0)
 
 
-def left_down():
-    win32api.mouse_event(win32con.MOUSEEVENTF_LEFTDOWN, 0, 0)
-    time.sleep(.1)
-
-
-def left_up():
-    win32api.mouse_event(win32con.MOUSEEVENTF_LEFTUP, 0, 0)
-    time.sleep(.1)
-
-
 def mouse_pos(cord):
     win32api.SetCursorPos((x_pad + cord[0], y_pad + cord[1]))
 
 
+# Start Game
 def start_game():
     # location of first menu
     mouse_pos((311, 204))
@@ -100,7 +93,7 @@ def clear_tables():
     left_click()
     time.sleep(1)
 
-
+# Necessary foods selected
 def make_sushi(food):
     if food == 'caliroll':
         sizeOfFood['rice'] -= 1
@@ -163,19 +156,23 @@ def buy_food(food):
         mouse_pos(Cord.menu_rice)
         time.sleep(.05)
         left_click()
+        time.sleep(.1)
         rgb = screen_grab()
-        if rgb.getpixel(Cord.buy_rice) != (109, 123, 127):
+        # If there is not enough money, cursor go exit button at menu. RGB value is (117,117,117), witout not clickable
+        if rgb.getpixel(Cord.buy_rice) != (117, 117, 117):
             print("rice is available")
             mouse_pos(Cord.buy_rice)
             time.sleep(.1)
             left_click()
             mouse_pos(Cord.deliver_normal)
-            sizeOfFood['rice'] += 10
-            print(" %d rice is available" % sizeOfFood['rice'])
             time.sleep(.1)
             left_click()
             time.sleep(2.5)
+            # Items are added 10 at each press
+            sizeOfFood['rice'] += 10
+            print(" %d rice is available" % sizeOfFood['rice'])
         else:
+            # Exit at the menu
             print("rice is not available")
             mouse_pos(Cord.menu_exit)
             time.sleep(.1)
@@ -189,19 +186,23 @@ def buy_food(food):
         mouse_pos(Cord.menu_toppings)
         time.sleep(.05)
         left_click()
+        time.sleep(.1)
         rgb = screen_grab()
+        # If there is not enough money, cursor go exit button at menu
         if rgb.getpixel(Cord.buy_nori) != (53, 53, 39):
             print("nori is available")
             mouse_pos(Cord.buy_nori)
             time.sleep(.1)
             left_click()
             mouse_pos(Cord.deliver_normal)
-            sizeOfFood['nori'] += 10
-            print(" %d nori is available" % sizeOfFood['nori'])
             time.sleep(.1)
             left_click()
             time.sleep(2.5)
+            # Items are added 10 at each press
+            sizeOfFood['nori'] += 10
+            print(" %d nori is available" % sizeOfFood['nori'])
         else:
+            # Exit at the menu
             print("nori is not available")
             mouse_pos(Cord.menu_exit)
             time.sleep(.1)
@@ -215,19 +216,23 @@ def buy_food(food):
         mouse_pos(Cord.menu_toppings)
         time.sleep(.05)
         left_click()
+        time.sleep(.1)
         rgb = screen_grab()
+        # If there is not enough money, cursor go exit button at menu
         if rgb.getpixel(Cord.buy_fish_egg) != (127, 61, 0):
             print("fish egg is available")
             mouse_pos(Cord.buy_fish_egg)
             time.sleep(.1)
             left_click()
             mouse_pos(Cord.deliver_normal)
-            sizeOfFood['fishegg'] += 10
-            print(" %d fishegg is available" % sizeOfFood['fishegg'])
             time.sleep(.1)
             left_click()
             time.sleep(2.5)
+            # Items are added 10 at each press
+            sizeOfFood['fishegg'] += 10
+            print(" %d fishegg is available" % sizeOfFood['fishegg'])
         else:
+            # Exit at the menu
             print("fish egg is not available")
             mouse_pos(Cord.menu_exit)
             time.sleep(.1)
@@ -241,7 +246,7 @@ def get_seat_one():
     arr = array(image.getcolors())
     arr = arr.sum()
     print(arr)
-    image.save(os.getcwd() + '\\seat_one__' + str(int(time.time())) + '.png', 'PNG')
+    #image.save(os.getcwd() + '\\seat_one__' + str(int(time.time())) + '.png', 'PNG')
     return arr
 
 
@@ -251,7 +256,7 @@ def get_seat_two():
     arr = array(image.getcolors())
     arr = arr.sum()
     print(arr)
-    image.save(os.getcwd() + '\\seat_two__' + str(int(time.time())) + '.png', 'PNG')
+    #image.save(os.getcwd() + '\\seat_two__' + str(int(time.time())) + '.png', 'PNG')
     return arr
 
 
@@ -261,7 +266,7 @@ def get_seat_three():
     arr = array(image.getcolors())
     arr = arr.sum()
     print(arr)
-    image.save(os.getcwd() + '\\seat_three__' + str(int(time.time())) + '.png', 'PNG')
+    #image.save(os.getcwd() + '\\seat_three__' + str(int(time.time())) + '.png', 'PNG')
     return arr
 
 
@@ -271,7 +276,7 @@ def get_seat_four():
     arr = array(image.getcolors())
     arr = arr.sum()
     print(arr)
-    image.save(os.getcwd() + '\\seat_four__' + str(int(time.time())) + '.png', 'PNG')
+    #image.save(os.getcwd() + '\\seat_four__' + str(int(time.time())) + '.png', 'PNG')
     return arr
 
 
@@ -281,7 +286,7 @@ def get_seat_five():
     arr = array(image.getcolors())
     arr = arr.sum()
     print(arr)
-    image.save(os.getcwd() + '\\seat_five__' + str(int(time.time())) + '.png', 'PNG')
+    #image.save(os.getcwd() + '\\seat_five__' + str(int(time.time())) + '.png', 'PNG')
     return arr
 
 
@@ -291,7 +296,7 @@ def get_seat_six():
     arr = array(image.getcolors())
     arr = arr.sum()
     print(arr)
-    image.save(os.getcwd() + '\\seat_six__' + str(int(time.time())) + '.png', 'PNG')
+    #image.save(os.getcwd() + '\\seat_six__' + str(int(time.time())) + '.png', 'PNG')
     return arr
 
 
@@ -309,7 +314,8 @@ seat_sushi = {3050: 'caliroll',
               2577: 'onigiri',
               2584: 'gunkan'}
 
-# Dictionary start size of food              
+
+# Dictionary start size of food
 sizeOfFood = {'shrimp': 5,
               'rice': 10,
               'nori': 10,
@@ -318,6 +324,7 @@ sizeOfFood = {'shrimp': 5,
               'unagi': 5}
 
 
+# According to number of foods buy process
 def check_food():
     for i, j in sizeOfFood.items():
         if i == 'nori' or i == 'rice' or i == 'fishegg':
@@ -326,6 +333,7 @@ def check_food():
                 buy_food(i)
 
 
+# Control is order of client
 def check_bubbles():
     check_food()
     s1 = get_seat_one()
@@ -406,6 +414,7 @@ def check_bubbles():
     clear_tables()
 
 
+#RGB values are without order
 class NoBubble:
     seat_one = 6495
     seat_two = 5893
@@ -414,6 +423,8 @@ class NoBubble:
     seat_five = 6867
     seat_six = 8040
 
+
+# Food and menu items are coordinates here
 class Cord:
     food_shrimp = (35, 334)
     food_rise = (92, 334)
@@ -427,7 +438,7 @@ class Cord:
 
     menu_toppings = (541, 271)
     buy_shrimp = (494, 221)
-    buy_unagi = (576, 271)
+    buy_unagi = (576, 221)
     buy_nori = (494, 276)
     buy_fish_egg = (576, 276)
     buy_salmon = (494, 331)
@@ -439,12 +450,18 @@ class Cord:
     buy_sake = (541, 309)
     #Normal Selected
     deliver_normal = (492, 293)
+    #Menu exit cord
+    menu_exit = (593, 335)
 
 
 def main():
     start_game()
-    while True:
-        check_bubbles()
+    try:
+        while True:
+            check_bubbles()
+
+    except KeyboardInterrupt:
+        pass
 
 
 if __name__ == '__main__':
